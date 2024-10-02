@@ -5,6 +5,7 @@ import { addItem } from './CartSlice';
 import { useDispatch , useSelector } from 'react-redux';
 
 function ProductList() {
+    const cart = useSelector((state) => state.cart.items);
     const [showCart, setShowCart] = useState(false); 
     const dispatch = useDispatch();
     const [showPlants, setShowPlants] = useState(false);
@@ -259,6 +260,14 @@ const handlePlantsClick = (e) => {
         ...prevState,
         [product.name]:true,
     }));
+  };
+
+  const calculateTotalItems = (items) => {
+    let totalItems = 0;
+    items.forEach((item) => {
+      totalItems += item.quantity;
+    });
+    return totalItems;
   };
     return (
         <div>
